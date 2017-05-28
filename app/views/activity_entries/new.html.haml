@@ -1,0 +1,5 @@
+= simple_form_for(ActivityEntry.new) do |f|
+  = f.input :activity, collection: current_user.activities
+  = f.input :minutes
+  = f.input :performed_on
+  = f.submit
