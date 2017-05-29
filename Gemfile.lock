@@ -183,6 +183,8 @@ GEM
       rubyzip (~> 1.0)
       websocket (~> 1.0)
     sexp_processor (4.9.0)
+    simple_calendar (2.2.5)
+      rails (>= 3.0)
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
@@ -237,6 +239,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   select2-rails
   selenium-webdriver
+  simple_calendar (~> 2.0)
   simple_form
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)

@@ -1,0 +1,61 @@
+.activity-legend {
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  border-radius: 5px;
+}
+
+.simple-calendar {
+  ul.activity-entries {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    height: 100%;
+
+    .activity {
+      text-align: right;
+      .name {
+        display: block;
+      }
+      .minutes {
+        display: none;
+      }
+    }
+
+    .activity:hover {
+      .name {
+        display: none;
+      }
+      .minutes {
+        display: block;
+      }
+    }
+
+  }
+
+  span.day-cell {
+    position: absolute;
+  }
+
+  .day {}
+
+  .wday-0 {}
+  .wday-1 {}
+  .wday-2 {}
+  .wday-3 {}
+  .wday-4 {}
+  .wday-5 {}
+  .wday-6 {}
+
+  .today {}
+  .past {}
+  .future {}
+
+  .start-date {}
+
+  .prev-month {}
+  .next-month { }
+  .current-month {}
+
+  .has-events {}
+}

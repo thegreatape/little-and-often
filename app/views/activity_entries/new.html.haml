@@ -6,3 +6,16 @@
       = f.input :performed_on
       = f.submit
   .col-lg-9
+    - current_user.activities.each do |activity|
+      .activity-legend{style: "background: #{activity.color}"} &nbsp;
+      %span.activity-name= activity.name
+
+    - total = @entries.group_by(&:performed_on).values.map{|v| v.sum(&:minutes)}.max.to_f
+    = month_calendar events: @entries, attribute: :performed_on do |date, entries|
+      %span.day-cell= date.day
+      %ul.activity-entries
+        - entries.each_with_index do |entry, idx|
+          %li.activity{style: "height: #{entry.minutes / total * 100}%; background: #{entry.activity.color};" }
+            .name= entry.activity.name
+            .minutes
+              #{entry.minutes} Minutes
