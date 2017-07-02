@@ -15,7 +15,4 @@
       %span.day-cell= date.day
       %ul.activity-entries
         - entries.each_with_index do |entry, idx|
-          %li.activity{style: "height: #{entry.minutes / total * 100}%; background: #{entry.activity.color};" }
-            .name= entry.activity.name
-            .minutes
-              #{entry.minutes} Minutes
+          %li.activity{style: "height: #{entry.minutes / total * 100}%; background: #{entry.activity.color};", data: {toggle: 'popover', content: "#{entry.activity.name} - #{entry.minutes} minutes", trigger: "hover" }}

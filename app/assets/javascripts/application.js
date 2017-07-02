@@ -15,3 +15,7 @@
 //= require twitter/bootstrap
 //= require select2-full
 //= require_tree .
+
+$(function(){
+  $('[data-toggle="popover"]').popover()
+});
