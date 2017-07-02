@@ -11,24 +11,11 @@
     padding: 0;
     list-style-type: none;
     height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
 
     .activity {
-      text-align: right;
-      .name {
-        display: block;
-      }
-      .minutes {
-        display: none;
-      }
-    }
-
-    .activity:hover {
-      .name {
-        display: none;
-      }
-      .minutes {
-        display: block;
-      }
+      display: block;
     }
 
   }
