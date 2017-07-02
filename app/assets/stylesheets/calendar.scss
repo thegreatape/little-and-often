@@ -40,9 +40,15 @@
 
   .start-date {}
 
-  .prev-month {}
-  .next-month { }
-  .current-month {}
+  .prev-month {
+    background: #fff;
+  }
+  .next-month {
+    background: #fff;
+  }
+  .current-month {
+    background: #fff;
+  }
 
   .has-events {}
 }
