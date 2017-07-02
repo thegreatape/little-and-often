@@ -13,6 +13,7 @@
  *= require select2
  *= require select2-bootstrap
  *= require simple_calendar
+ *= require devise_bootstrap_views
  *= require_tree .
  *= require_self
  */

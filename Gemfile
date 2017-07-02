@@ -19,6 +19,7 @@ gem 'simple_form'
 gem "jquery-rails"
 gem "select2-rails"
 gem "simple_calendar", "~> 2.0"
+gem 'devise-bootstrap-views'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
