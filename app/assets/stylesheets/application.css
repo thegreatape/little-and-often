@@ -14,6 +14,7 @@
  *= require select2-bootstrap
  *= require simple_calendar
  *= require devise_bootstrap_views
+ *= require bootstrap-darkly
  *= require_tree .
  *= require_self
  */
