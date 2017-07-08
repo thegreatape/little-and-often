@@ -1,6 +1,6 @@
 class Palette
-  attr_reader :angles, :ranges, :saturation_jitter, :lightness_jitter, :minimum_hue_offset
-  def initialize(angles:, ranges:, lightness_jitter: 0, saturation_jitter: 0, minimum_hue_offset: 0)
+  attr_reader :angles, :ranges, :saturation_jitter, :lightness_jitter, :minimum_hue_offset, :minimum_color_distance
+  def initialize(angles:, ranges:, lightness_jitter: 0, saturation_jitter: 0, minimum_hue_offset: 0, minimum_color_distance: 0)
     if angles.count != ranges.count
       raise "Palette must be passed same number of angles and ranges"
     end
@@ -10,6 +10,7 @@ class Palette
     @saturation_jitter = saturation_jitter
     @lightness_jitter = lightness_jitter
     @minimum_hue_offset = minimum_hue_offset
+    @minimum_color_distance = minimum_color_distance
   end
 
   def self.triad
@@ -25,15 +26,24 @@ class Palette
         ranges: [50, 50, 50],
         minimum_hue_offset: 10,
         lightness_jitter: 20,
-        saturation_jitter: 10)
+        saturation_jitter: 10,
+        minimum_color_distance: 5)
   end
 
-  def generate(count:, initial: nil)
-    initial ||= Color.random
+  def generate(count:, existing_palette: nil)
+    existing_palette ||= [Color.random]
+    max_retries = 100
 
-    [initial] + (count - 1).times.map do
-      next_color(initial)
+    while count > 0
+      new_color = next_color(existing_palette.first)
+      if max_retries == 0 || existing_palette.all? {|c| c.distance_from(new_color) >= minimum_color_distance }
+        existing_palette << new_color
+        count -= 1
+      else
+        max_retries -= 1
+      end
     end
+    existing_palette
   end
 
   def next_color(color)

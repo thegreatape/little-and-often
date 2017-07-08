@@ -5,7 +5,8 @@ class ColorTestsController < ApplicationController
                   palette_params = {
                     minimum_hue_offset: params[:palette][:minimum_hue_offset].to_i,
                     lightness_jitter: params[:palette][:lightness_jitter].to_i,
-                    saturation_jitter: params[:palette][:saturation_jitter].to_i
+                    saturation_jitter: params[:palette][:saturation_jitter].to_i,
+                    minimum_color_distance: params[:palette][:minimum_color_distance].to_i
                   }
                   palette_params[:angles] = [
                     params[:palette][:first_angle],
@@ -26,7 +27,7 @@ class ColorTestsController < ApplicationController
         (params[:palette].try(:[], :initial_saturation) || 30).to_i,
         (params[:palette].try(:[], :initial_lightness) || 50).to_i
       )
-      palette.generate(initial: color, count: 15).map(&:to_css)
+      palette.generate(existing_palette: [color], count: 15).map(&:to_css)
     end
   end
 end

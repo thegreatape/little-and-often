@@ -11,6 +11,18 @@ class Color
     new(rand * 360, rand * 100, rand * 100)
   end
 
+  def distance_from(other)
+    # square root of the sum of the squares of the
+    # differences between corresponding coordinates
+    Math.sqrt(
+      [
+        (hue - other.hue)**2,
+        ((saturation / 100) * 360 - (other.saturation / 100) * 360)**2,
+        ((lightness / 100) * 360 - (other.lightness / 100) * 360)**2,
+      ].sum
+    )
+  end
+
   def to_css
     "hsl(#{hue.to_i}, #{saturation.to_i}%, #{lightness.to_i}%)"
   end
