@@ -8,16 +8,8 @@ class ColorTestsController < ApplicationController
                     saturation_jitter: params[:palette][:saturation_jitter].to_i,
                     minimum_color_distance: params[:palette][:minimum_color_distance].to_i
                   }
-                  palette_params[:angles] = [
-                    params[:palette][:first_angle],
-                    params[:palette][:second_angle],
-                    params[:palette][:third_angle]
-                  ].compact.map(&:to_i)
-                  palette_params[:ranges] = [
-                    params[:palette][:first_range],
-                    params[:palette][:second_range],
-                    params[:palette][:third_range]
-                  ].compact.map(&:to_i)
+                  palette_params[:angles] = angle_params
+                  palette_params[:ranges] = range_params
                   Palette.new(palette_params)
                 else
                   Palette.elizabeth_custom
@@ -30,4 +22,32 @@ class ColorTestsController < ApplicationController
       palette.generate(existing_palette: [color], count: 15).map(&:to_css)
     end
   end
+
+  private
+
+  def range_params
+    return [] unless params[:palette].present?
+
+    [
+      params[:palette][:first_range],
+      params[:palette][:second_range],
+      params[:palette][:third_range]
+    ].compact.map(&:to_i)
+  end
+
+  def angle_params
+    return [] unless params[:palette].present?
+
+    [
+      params[:palette][:first_angle],
+      params[:palette][:second_angle],
+      params[:palette][:third_angle]
+    ].compact.map(&:to_i)
+
+  end
+
+  def wheel_ranges
+    angle_params.zip(range_params)
+  end
+  helper_method :wheel_ranges
 end

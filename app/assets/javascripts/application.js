@@ -14,6 +14,7 @@
 //= require jquery
 //= require twitter/bootstrap
 //= require select2-full
+//= require p5/lib/p5
 //= require_tree .
 
 $(function(){
