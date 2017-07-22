@@ -16,12 +16,17 @@
       = palette_field(f, :minimum_color_distance)
       = f.submit
 .col-lg-9
-  - @palettes.each do |colors|
-    %table
-      %tbody
-        %tr
-          %td
-            #{colors.length} Colors
+  .row
+    %h2 Selected Hue Ranges
+    #color-wheel{data: {ranges: wheel_ranges}}
+  .row
+    %h2 Generated Palettes
+    - @palettes.each do |colors|
+      %table
+        %tbody
+          %tr
+            %td
+              #{colors.length} Colors
           - colors.each do |color|
             %td{style: "text-align: center; width: 80px; height: 120px; background: #{color}"}= color
     %br
