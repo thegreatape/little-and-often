@@ -1,6 +1,6 @@
 class Palette
-  attr_reader :angles, :ranges, :saturation_jitter, :lightness_jitter, :minimum_hue_offset, :minimum_color_distance
-  def initialize(angles:, ranges:, lightness_jitter: 0, saturation_jitter: 0, minimum_hue_offset: 0, minimum_color_distance: 0)
+  attr_reader :angles, :ranges, :saturation_jitter, :lightness_jitter, :minimum_color_distance, :initial_saturation, :initial_lightness
+  def initialize(angles:, ranges:, lightness_jitter: 0, saturation_jitter: 0, minimum_color_distance: 0, initial_saturation: 30, initial_lightness: 50)
     if angles.count != ranges.count
       raise "Palette must be passed same number of angles and ranges"
     end
@@ -9,8 +9,9 @@ class Palette
     @ranges = ranges
     @saturation_jitter = saturation_jitter
     @lightness_jitter = lightness_jitter
-    @minimum_hue_offset = minimum_hue_offset
     @minimum_color_distance = minimum_color_distance
+    @initial_saturation = initial_saturation
+    @initial_lightness = initial_lightness
   end
 
   def self.triad
@@ -31,7 +32,7 @@ class Palette
   end
 
   def generate(count:, existing_palette: nil)
-    existing_palette ||= [Color.random]
+    existing_palette ||= [random_color_within_slices]
     max_retries = 100
 
     while count > 0
@@ -46,13 +47,25 @@ class Palette
     existing_palette
   end
 
+  def random_color_within_slices
+      color = Color.new(
+        rand(degree_ranges.sample),
+        initial_saturation || 30,
+        initial_lightness || 50
+      )
+  end
+
+  def degree_ranges
+    angles.zip(ranges).map{|p| (p[0]..(p[0]+ p[1]))}
+  end
+
   def next_color(color)
     slice_index = rand(angles.count).to_i
-    hue_offset = [angles[slice_index] + rand(ranges[slice_index]), minimum_hue_offset].max
+    hue = angles[slice_index] + rand(ranges[slice_index])
     saturation_offset = ((rand * saturation_jitter * 2) - saturation_jitter)
     lightness_offset = ((rand * lightness_jitter * 2) - lightness_jitter)
     Color.new(
-      (color.hue + hue_offset) % 360,
+      hue % 360,
       color.saturation + saturation_offset,
       color.lightness + lightness_offset
     )
