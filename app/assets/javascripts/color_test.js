@@ -1,12 +1,12 @@
 function drawWheel(id) {
   return function(sketch) {
     sketch.setup = function (){
-      var canvas = sketch.createCanvas(200, 200);
+      var canvas = sketch.createCanvas(125, 125);
 
-      var wheelX = 100,
-          wheelY = 100,
-          wheelWidth = 200,
-          wheelHeight = 200;
+      var wheelX = 62.5,
+          wheelY = 62.5,
+          wheelWidth = 125,
+          wheelHeight = 125;
 
       sketch.angleMode(sketch.DEGREES);
       sketch.colorMode(sketch.HSB);
@@ -27,7 +27,7 @@ function drawWheel(id) {
       // inner white circle
       sketch.stroke(0,0,0);
       sketch.strokeWeight(0);
-      var colorThickness = 40
+      var colorThickness = 30
       sketch.ellipse(wheelX, wheelY, wheelWidth - colorThickness, wheelHeight - colorThickness);
 
       console.log(id);
