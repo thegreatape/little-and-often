@@ -16,16 +16,18 @@
       = f.submit
 .col-lg-9
   .row
-    %h2 Selected Hue Ranges
-    #color-wheel{data: {ranges: wheel_ranges}}
-  .row
     %h2 Generated Palettes
-    - @palettes.each do |colors|
-      %table
-        %tbody
-          %tr
-            %td
-              #{colors.length} Colors
-          - colors.each do |color|
-            %td{style: "text-align: center; width: 80px; height: 120px; background: #{color}"}= color
-    %br
+    - @palettes.each_with_index do |palette, i|
+      - colors = palette.generate(count: 15).map(&:to_css)
+      .row
+        .col-lg-3
+          .color-wheel{id: "color-wheel-#{i}", data: {ranges: wheel_ranges(palette)}}
+        .col-lg-9
+          %table
+            %tbody
+              %tr
+                %td
+                  #{colors.length} Colors
+              - colors.each do |color|
+                %td{style: "text-align: center; width: 80px; height: 120px; background: #{color}"}= color
+        %br

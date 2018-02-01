@@ -13,7 +13,6 @@ class ColorTestsController < ApplicationController
                 else
                   Palette.elizabeth_custom
                 end
-      palette.generate(count: 15).map(&:to_css)
     end
   end
 
@@ -40,8 +39,8 @@ class ColorTestsController < ApplicationController
 
   end
 
-  def wheel_ranges
-    angle_params.zip(range_params)
+  def wheel_ranges(palette)
+    palette.angles.zip(palette.ranges)
   end
   helper_method :wheel_ranges
 end
