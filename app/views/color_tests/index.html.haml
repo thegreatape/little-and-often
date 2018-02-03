@@ -26,8 +26,9 @@
           %table
             %tbody
               %tr
-                %td
-                  #{colors.length} Colors
-              - colors.each do |color|
-                %td{style: "text-align: center; width: 80px; height: 120px; background: #{color}"}= color
+                %td{colspan:3}
+                  Angle Offset: #{palette.angle_offset}
+              %tr
+                - colors.each do |color|
+                  %td{style: "text-align: center; width: 80px; height: 120px; background: #{color}"}= color
         %br

@@ -1,12 +1,12 @@
 class Palette
-  attr_reader :angles, :ranges, :saturation_jitter, :lightness_jitter, :minimum_color_distance, :initial_saturation, :initial_lightness
-  def initialize(angles:, ranges:, lightness_jitter: 0, saturation_jitter: 0, angle_jitter: 360, minimum_color_distance: 0, initial_saturation: 30, initial_lightness: 50)
+  attr_reader :angles, :angle_offset, :ranges, :saturation_jitter, :lightness_jitter, :minimum_color_distance, :initial_saturation, :initial_lightness
+  def initialize(angles:, ranges:, lightness_jitter: 0, saturation_jitter: 0, angle_offset: 0, minimum_color_distance: 0, initial_saturation: 0, initial_lightness: 0)
     if angles.count != ranges.count
       raise "Palette must be passed same number of angles and ranges"
     end
 
-    angle_offset = rand(angle_jitter).to_i
-    @angles = angles.map {|a| a + angle_offset}
+    @angle_offset = angle_offset
+    @angles = angles.map {|a| a + @angle_offset}
     @ranges = ranges
     @saturation_jitter = saturation_jitter
     @lightness_jitter = lightness_jitter
