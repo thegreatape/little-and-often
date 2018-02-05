@@ -49,11 +49,11 @@ class Palette
   end
 
   def random_color_within_slices
-      color = Color.new(
-        rand(degree_ranges.sample),
-        initial_saturation || 30,
-        initial_lightness || 50
-      )
+    color = Color.new(
+      rand(degree_ranges.sample),
+      initial_saturation || 30,
+      initial_lightness || 50
+    )
   end
 
   def degree_ranges
