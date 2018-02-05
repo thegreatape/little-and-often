@@ -32,6 +32,17 @@ class Palette
         minimum_color_distance: 5)
   end
 
+  def self.v1_demo
+    new(angle_offset: 10,
+        angles: [0, 210],
+        ranges: [90, 30],
+        minimum_color_distance: 15,
+        lightness_jitter: 20,
+        saturation_jitter: 10,
+        initial_lightness: 55,
+        initial_saturation: 45)
+  end
+
   def generate(count:, existing_palette: nil)
     existing_palette ||= [random_color_within_slices]
     max_retries = 100
