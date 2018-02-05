@@ -36,7 +36,7 @@ class Palette
     existing_palette ||= [random_color_within_slices]
     max_retries = 100
 
-    while count > 0
+    while count > 1
       new_color = next_color(existing_palette.first)
       if max_retries == 0 || existing_palette.all? {|c| c.distance_from(new_color) >= minimum_color_distance }
         existing_palette << new_color
